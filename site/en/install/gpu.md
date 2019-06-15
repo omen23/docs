@@ -108,6 +108,21 @@ complicates installation of the NVIDIA driver and is beyond the scope of these i
 </code>
 </pre>
 
+# Remove metapackes blocking install of drivers with 32-bit support (get apps working that rely on 32-bit libGL like Steam)
+**Do not worry CUDA 10.0 will keep on working fine...
+...maybe you will need new symlinks for nvcc etc. to one of your $PATH directories
+Check which driver is best suited for your system stability (418.56 for me - 430.26 becomes unusable afer S3)
+Choose one of nvidia-driver-{396,410,415,418,430}**
+<coda class="devsite-terminal">sudo apt-get remove cuda-10-0 cuda-drivers \ 
+        && sudo apt-mark hold cuda-curand-dev-10-0 cuda-cusolver-10-0 cuda-cusolver-dev-10-0 cuda-cusparse-10-0 \
+           cuda-cusparse-dev-10-0 cuda-documentation-10-0 cuda-libraries-10-0 cuda-libraries-dev-10-0 cuda-npp-10-0 \
+           cuda-npp-dev-10-0 cuda-nsight-10-0 cuda-nsight-compute-10-0 cuda-nvgraph-10-0 cuda-nvgraph-dev-10-0 \
+           cuda-nvjpeg-10-0 cuda-nvjpeg-dev-10-0 cuda-nvml-dev-10-0 cuda-nvrtc-10-0 cuda-nvrtc-dev-10-0 cuda-nvvp-10-0 \
+           cuda-samples-10-0 cuda-toolkit-10-0 cuda-tools-10-0 cuda-visual-tools-10-0 \
+        && sudo apt-get install ppa-purge \
+        && sudo add-apt-repository -y -u ppa:graphics-drivers/ppa \
+        && sudo apt-get install nvidia-418 xserver-xorg-video-nvidia-418
+  
 
 #### Ubuntu 16.04 (CUDA 10)
 
